@@ -6,14 +6,14 @@ public class NoiseSampleManager
 {
 	private List<NoiseSample> samples = new List<NoiseSample>();
 
-	private SampleInterpolator interpolator;
+	private DefaultInterpolator interpolator;
 	
 	private Vector3 sampleScale;
 	private float noiseScale;
 
 
 	public NoiseSampleManager(float noiseScale){
-		this.interpolator = new SampleInterpolator ();
+		this.interpolator = new DefaultInterpolator ();
 		this.noiseScale = noiseScale;
 	}
 

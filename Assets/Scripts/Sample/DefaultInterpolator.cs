@@ -1,11 +1,11 @@
 using UnityEngine;
 using System.Collections;
 
-public class SampleInterpolator : MonoBehaviour
+public class DefaultInterpolator : Interpolator
 {
 	private NoiseSample noiseSample;
 
-	public SampleInterpolator(){
+	public DefaultInterpolator(){
 	}
 
 	public float interpolateAt(NoiseSample sample, float x, float y, float z){
