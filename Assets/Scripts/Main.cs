@@ -43,14 +43,25 @@ public class Main : MonoBehaviour
 		NoiseGenerator.setSampleSize (sampleSize);
 		Chunk.setSize (chunkSize);
 		Chunk.setDiscretization (voxelsPerUnit);
+
+		SampleRepository.registerSample ("sample1", NoiseGenerator.Perlin (firstSampleOctaves));
+		SampleRepository.registerSample ("sample2", NoiseGenerator.Perlin (secondSampleOctaves));
+
+		NoiseSample noiseSample1 = new NoiseSample (
+			SampleRepository.getSample ("sample1"), weightFirstSample,
+			new DefaultSaturation (noiseSaturation1, 1f), firstSampleScale);
+
+		NoiseSample noiseSample2 = new NoiseSample (
+			SampleRepository.getSample ("sample2"), weightSecondSample,
+			new DefaultSaturation (noiseSaturation2, 1f), secondSampleScale);
+
+
 		NoiseSampleManager sampleManager = new NoiseSampleManager (noiseScale);
-		sampleManager.addSample (new NoiseSample (
-			NoiseGenerator.Perlin (firstSampleOctaves), weightFirstSample,
-			new DefaultSaturation(noiseSaturation1, 1f), firstSampleScale));
-		sampleManager.addSample (new NoiseSample (
-			NoiseGenerator.Perlin (secondSampleOctaves), weightSecondSample,
-			new DefaultSaturation(noiseSaturation2, 1f), secondSampleScale));
+		sampleManager.addSample (noiseSample1);
+		sampleManager.addSample (noiseSample2);
+
 		NoisedFlatDensity density = new NoisedFlatDensity (height, sampleManager);
+
 		ChunkProcessor processor = new ChunkProcessor ();
 		for (int i = 0; i < horizontalChunks; i++) {
 			for (int j = 0; j < verticalChunks; j++) {

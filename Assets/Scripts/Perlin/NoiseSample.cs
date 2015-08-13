@@ -7,6 +7,7 @@ public class NoiseSample
 	public float[,,] sample{ get; private set;}
 	public Vector3 sampleScale;
 	public Saturation saturation;
+	public Vector3 rotation;
 
 	public NoiseSample(float[,,] sample, float weight, Saturation saturation, Vector3 sampleScale){
 		this.weight = weight;
