@@ -1,18 +1,18 @@
 using UnityEngine;
 using System.Collections;
 
-public class SampleInterpolator : MonoBehaviour
+public class DefaultInterpolator : Interpolator
 {
 	private NoiseSample noiseSample;
 
-	public SampleInterpolator(){
+	public DefaultInterpolator(){
 	}
 
 	public float interpolateAt(NoiseSample sample, float x, float y, float z){
 		this.noiseSample = sample;
-		int X0 = fastFloor(x) % (sample.sample.GetLength(0)-1);
-		int Y0 = fastFloor(y) % (sample.sample.GetLength(1)-1);
-		int Z0 = fastFloor(z) % (sample.sample.GetLength(2)-1);
+		int X0 = fastFloor(x) % (sample.getSample().GetLength(0)-1);
+		int Y0 = fastFloor(y) % (sample.getSample().GetLength(1)-1);
+		int Z0 = fastFloor(z) % (sample.getSample().GetLength(2)-1);
 		x -= fastFloor (x);
 		y -= fastFloor (y);
 		z -= fastFloor (z);
@@ -29,7 +29,7 @@ public class SampleInterpolator : MonoBehaviour
 	}
 
 	private float interpolateCube(int i, int j, int k, float fx, float fy, float fz){
-		float[,,] sample = noiseSample.sample;
+		float[,,] sample = noiseSample.getSample();
 		float bottom = interpolate (interpolate (sample [i, j, k], sample [i + 1, j, k], fx),
 		                           interpolate (sample [i, j, k + 1], sample [i + 1, j, k + 1], fx),
 		                           fz);

@@ -3,6 +3,8 @@ Microsoft Visual Studio Solution File, Format Version 11.00
 
 Project("{D05CF06F-C340-5E93-EDAF-ABA36734B773}") = "Procedure complex terrain using voxels", "Assembly-CSharp.csproj", "{90D237F0-11BB-DB72-2CE7-71C0B0C8304C}"
 EndProject
+Project("{D05CF06F-C340-5E93-EDAF-ABA36734B773}") = "Procedure complex terrain using voxels", "Assembly-CSharp-Editor.csproj", "{4038FF09-DEFE-7557-7787-6ED9C690486D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -13,11 +15,15 @@ Global
 		{90D237F0-11BB-DB72-2CE7-71C0B0C8304C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{90D237F0-11BB-DB72-2CE7-71C0B0C8304C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{90D237F0-11BB-DB72-2CE7-71C0B0C8304C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4038FF09-DEFE-7557-7787-6ED9C690486D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4038FF09-DEFE-7557-7787-6ED9C690486D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4038FF09-DEFE-7557-7787-6ED9C690486D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4038FF09-DEFE-7557-7787-6ED9C690486D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
-																																			GlobalSection(MonoDevelopProperties) = preSolution
+																																																																	GlobalSection(MonoDevelopProperties) = preSolution
 		StartupItem = Assembly-CSharp.csproj
 		Policies = $0
 		$0.TextStylePolicy = $1

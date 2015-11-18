@@ -3,26 +3,17 @@ using System.Collections;
 
 public class Main : MonoBehaviour
 {
+
 	[Header("   Sample Configuration")]
-	public Vector3 sampleSize = new Vector3(50, 50, 50);
-	public Vector3 firstSampleScale = new Vector3 (1f, 1f, 1f);
-	public Vector3 secondSampleScale = new Vector3 (1f, 1f, 1f);
+	//public Vector3 firstSampleScale = new Vector3 (1f, 1f, 1f);
+	//public Vector3 secondSampleScale = new Vector3 (1f, 1f, 1f);
 	[Range(0.0f, 100.0f)]
 	public float noiseScale = 1;
-
-	[Range(1, 10)]
-	public int firstSampleOctaves = 1;
-
-	[Range(1, 10)]
-	public int secondSampleOctaves = 1;
-
-	public float weightFirstSample = 0.8f;
-	public float weightSecondSample = 0.2f;
-
-	[Range(-1.0f, 1.0f)]
-	public float noiseSaturation1 = 0f;
-	[Range(-1.0f, 1.0f)]
-	public float noiseSaturation2 = 0f;
+	//public float weightFirstSample = 0.8f;
+	//public float weightSecondSample = 0.2f;
+	
+	//public Vector2 noiseSaturation1 = new Vector2(-1, 1);
+	//public Vector2 noiseSaturation2 = new Vector2(-1, 1);
 
 	public float height = 3f;
 
@@ -36,22 +27,37 @@ public class Main : MonoBehaviour
 	[Range(1, 1000)]
 	public int verticalChunks = 2;
 
+	[Header("   Sample List")]
+	public NoiseSample[] noiseSamples;
+
 
 	// Use this for initialization
 	void Start ()
 	{
-		NoiseGenerator.setSampleSize (sampleSize);
 		Chunk.setSize (chunkSize);
 		Chunk.setDiscretization (voxelsPerUnit);
 		NoiseSampleManager sampleManager = new NoiseSampleManager (noiseScale);
-		sampleManager.addSample (new NoiseSample (
-			NoiseGenerator.Perlin (firstSampleOctaves), weightFirstSample,
-			new DefaultSaturation(noiseSaturation1, 1f), firstSampleScale));
-		sampleManager.addSample (new NoiseSample (
-			NoiseGenerator.Perlin (secondSampleOctaves), weightSecondSample,
-			new DefaultSaturation(noiseSaturation2, 1f), secondSampleScale));
 		NoisedFlatDensity density = new NoisedFlatDensity (height, sampleManager);
-		ChunkProcessor processor = new ChunkProcessor ();
+
+		foreach (NoiseSample noiseSample in noiseSamples) {
+			SampleRepository.registerSample (noiseSample.getPersistentSample ());
+			sampleManager.addSample (noiseSample);
+		}
+
+		TerrainGenerator generator = new TerrainGenerator (density, horizontalChunks, verticalChunks);
+		generator.generate ();
+
+		/*NoiseSample noiseSample1 = new NoiseSample (
+			SampleRepository.getSample ("sample1"), weightFirstSample,
+			new DefaultSaturation (noiseSaturation1.x, noiseSaturation1.y), firstSampleScale);
+
+		NoiseSample noiseSample2 = new NoiseSample (
+			SampleRepository.getSample ("sample2"), weightSecondSample,
+			new DefaultSaturation (noiseSaturation2.x, noiseSaturation2.y), secondSampleScale);*/
+
+
+
+		/*ChunkProcessor processor = new ChunkProcessor ();
 		for (int i = 0; i < horizontalChunks; i++) {
 			for (int j = 0; j < verticalChunks; j++) {
 				for (int k = 0; k < horizontalChunks; k++) {
@@ -60,7 +66,8 @@ public class Main : MonoBehaviour
 					processor.process (chunk);
 				}
 			}
-		}
+		}*/
+
 	}
 	
 	// Update is called once per frame
