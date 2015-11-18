@@ -1,11 +1,13 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Sample\NoiseSample.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\CameraController.cs">
     <Files>
+      <File FileName="Assets\Scripts\Persistence\PersistentSample3D.cs" Line="51" Column="39" />
+      <File FileName="Assets\Editor\Sample\SamplePrefabCreator.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\Sample\NoiseSample.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\Main.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\Sample\DefaultInterpolator.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\Sample\NoiseSample.cs" Line="39" Column="15" />
-      <File FileName="Assets\Scripts\Sample\NoiseSampleManager.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\Test\PrefabTest.cs" Line="1" Column="1" />
+      <File FileName="Assets\CameraController.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

@@ -4,19 +4,19 @@ using System.Collections;
 /// <summary>
 /// This class sets the configuration for a given sample for its use building the terrain. 
 /// </summary>
-public class NoiseSample
+public class NoiseSample : ScriptableObject
 {
 	/// <summary>
 	/// Weight of this noise in the final terrain.
 	/// </summary>
 	/// <value>The weight.</value>
-	public float weight{ get; private set;}
+	public float weight;
 
 	/// <summary>
 	/// 3D sample of smooth moise.
 	/// </summary>
 	/// <value>The sample.</value>
-	public float[,,] sample{ get; private set;}
+	public PersistentSample3D sample;
 
 	/// <summary>
 	/// The sample scale.
@@ -32,8 +32,7 @@ public class NoiseSample
 	public Vector3 rotation = Vector3.zero;
 	public Vector3 pivot = Vector3.zero;
 
-	public NoiseSample(float[,,] sample, float weight, Saturation saturation, Vector3 sampleScale){
-		setSample (sample);
+	public void InitNoise(float weight, Saturation saturation, Vector3 sampleScale){
 		setSaturation (saturation);
 		setScale (sampleScale);
 		setWeight (weight);
@@ -51,8 +50,16 @@ public class NoiseSample
 		this.saturation = saturation;
 	}
 
-	public void setSample(float[,,] sample){
+	public void setPersistentSample(PersistentSample3D sample){
 		this.sample = sample;
+	}
+
+	public PersistentSample3D getPersistentSample(){
+		return sample;
+	}
+
+	public float[,,] getSample(){
+		return SampleRepository.getSample (sample.getName());
 	}
 
 	public void setWeight(float weight){

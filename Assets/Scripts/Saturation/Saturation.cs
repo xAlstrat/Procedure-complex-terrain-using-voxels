@@ -1,9 +1,9 @@
 using UnityEngine;
 using System.Collections;
 
-public interface Saturation
+public abstract class Saturation : ScriptableObject
 {
 
-	float apply(float value);
+	public abstract float apply(float value);
 }
 

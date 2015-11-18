@@ -46,6 +46,7 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\Scripts\CameraController.cs" />
      <Compile Include="Assets\Scripts\Chunk.cs" />
      <Compile Include="Assets\Scripts\ChunkProcessor.cs" />
      <Compile Include="Assets\Scripts\Cube.cs" />
@@ -55,13 +56,19 @@
      <Compile Include="Assets\Scripts\Main.cs" />
      <Compile Include="Assets\Scripts\MarchingCube.cs" />
      <Compile Include="Assets\Scripts\Pair.cs" />
-     <Compile Include="Assets\Scripts\Perlin\DefaultSaturation.cs" />
      <Compile Include="Assets\Scripts\Perlin\NoiseGenerator.cs" />
-     <Compile Include="Assets\Scripts\Perlin\NoiseSample.cs" />
-     <Compile Include="Assets\Scripts\Perlin\NoiseSampleManager.cs" />
      <Compile Include="Assets\Scripts\Perlin\NoiseVertexInfo.cs" />
-     <Compile Include="Assets\Scripts\Perlin\SampleInterpolator.cs" />
-     <Compile Include="Assets\Scripts\Perlin\Saturation.cs" />
+     <Compile Include="Assets\Scripts\Persistence\PersistentSample3D.cs" />
+     <Compile Include="Assets\Scripts\Sample\DefaultInterpolator.cs" />
+     <Compile Include="Assets\Scripts\Sample\Interpolator.cs" />
+     <Compile Include="Assets\Scripts\Sample\NoiseSample.cs" />
+     <Compile Include="Assets\Scripts\Sample\NoiseSampleManager.cs" />
+     <Compile Include="Assets\Scripts\Sample\SampleRepository.cs" />
+     <Compile Include="Assets\Scripts\Saturation\DefaultSaturation.cs" />
+     <Compile Include="Assets\Scripts\Saturation\Saturation.cs" />
+     <Compile Include="Assets\Scripts\Terrain\TerrainBuilder.cs" />
+     <Compile Include="Assets\Scripts\Terrain\TerrainGenerator.cs" />
+     <Compile Include="Assets\Scripts\Test\PrefabTest.cs" />
      <Compile Include="Assets\Scripts\TestTexture.cs" />
      <Compile Include="Assets\Scripts\VectorV3.cs" />
      <Compile Include="Assets\Scripts\Voxel.cs" />
