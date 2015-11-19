@@ -9,12 +9,12 @@ public class NoiseSampleManager
 	private DefaultInterpolator interpolator;
 	
 	private Vector3 sampleScale;
-	private float noiseScale;
+	private float groundLevel = 0;
 
 
-	public NoiseSampleManager(float noiseScale){
+	public NoiseSampleManager(float groundLevel){
+		this.groundLevel = groundLevel;
 		this.interpolator = new DefaultInterpolator ();
-		this.noiseScale = noiseScale;
 	}
 
 	public void addSample(NoiseSample sample){
@@ -25,13 +25,22 @@ public class NoiseSampleManager
 		float totalWeight = 0;
 		float result = 0;
 		float noise;
+		float tx, ty, tz;
+		bool noiseApplied = false;
 		for (int c = 0; c < samples.Count; c++) {
+			tx = x + samples [c].traslation.x;
+			ty = y + samples [c].traslation.y;
+			tz = z + samples [c].traslation.z;
+			if(samples[c].filterAt(tx, ty, tz, groundLevel, noiseApplied))
+				continue;
 			sampleScale = samples[c].sampleScale;
-			noise = interpolator.interpolateAt (samples[c], x*sampleScale.x, y*sampleScale.y, z*sampleScale.z);
-			result += samples[c].saturation.apply(noise) * samples[c].weight;
-			totalWeight += Mathf.Abs(samples[c].weight);
+			noise = interpolator.interpolateAt (samples[c], tx*sampleScale.x, ty*sampleScale.y, tz*sampleScale.z);
+			result += samples[c].saturation.apply(noise) * samples[c].noiseScale;
+			if(result != 0 && !noiseApplied)
+				noiseApplied = true;
+			//totalWeight += Mathf.Abs(samples[c].weight);
 		}
-		return noiseScale * result / totalWeight;
+		return result;
 	}
 
 

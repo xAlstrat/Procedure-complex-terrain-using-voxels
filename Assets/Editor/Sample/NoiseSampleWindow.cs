@@ -11,7 +11,7 @@ public class NoiseSampleWindow : EditorWindow {
 
 	private string name = "NoisedSample";
 	
-	[MenuItem("Procedure Terrain/Create Asset/Noised Sample")]
+	[MenuItem("Procedure Terrain/Create Noise/Noised Sample")]
 	private static void noisedSampleWindow()
 	{
 		EditorWindow.GetWindow<NoiseSampleWindow>(true, "Noised Sample Asset Creator");
@@ -42,7 +42,7 @@ public class NoiseSampleWindow : EditorWindow {
 		NoiseSample noiseSample = ScriptableObject.CreateInstance<NoiseSample> ();
 		noiseSample.setScale (scale);
 		noiseSample.setSaturation (saturation);
-		noiseSample.setWeight (weight);
+		noiseSample.setNoiseScale (weight);
 		noiseSample.setPersistentSample (sample);
 		checkPath ();
 		AssetDatabase.CreateAsset (noiseSample, "Assets/ProcedureTerrain/NoiseSample/"+name+".asset");

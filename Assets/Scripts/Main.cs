@@ -8,14 +8,13 @@ public class Main : MonoBehaviour
 	//public Vector3 firstSampleScale = new Vector3 (1f, 1f, 1f);
 	//public Vector3 secondSampleScale = new Vector3 (1f, 1f, 1f);
 	[Range(0.0f, 100.0f)]
-	public float noiseScale = 1;
 	//public float weightFirstSample = 0.8f;
 	//public float weightSecondSample = 0.2f;
 	
 	//public Vector2 noiseSaturation1 = new Vector2(-1, 1);
 	//public Vector2 noiseSaturation2 = new Vector2(-1, 1);
 
-	public float height = 3f;
+	public float groundLevel = 3f;
 
 	[Header("   Chunk/Unit Configuration")]
 	[Range(1, 50)]
@@ -36,8 +35,8 @@ public class Main : MonoBehaviour
 	{
 		Chunk.setSize (chunkSize);
 		Chunk.setDiscretization (voxelsPerUnit);
-		NoiseSampleManager sampleManager = new NoiseSampleManager (noiseScale);
-		NoisedFlatDensity density = new NoisedFlatDensity (height, sampleManager);
+		NoiseSampleManager sampleManager = new NoiseSampleManager (groundLevel);
+		NoisedFlatDensity density = new NoisedFlatDensity (groundLevel, sampleManager);
 
 		foreach (NoiseSample noiseSample in noiseSamples) {
 			SampleRepository.registerSample (noiseSample.getPersistentSample ());

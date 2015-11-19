@@ -60,6 +60,8 @@
      <Compile Include="Assets\Scripts\Perlin\NoiseVertexInfo.cs" />
      <Compile Include="Assets\Scripts\Persistence\PersistentSample3D.cs" />
      <Compile Include="Assets\Scripts\Sample\DefaultInterpolator.cs" />
+     <Compile Include="Assets\Scripts\Sample\Filter\NoiseFilter.cs" />
+     <Compile Include="Assets\Scripts\Sample\Filter\VerticalFlatNoiseFilter.cs" />
      <Compile Include="Assets\Scripts\Sample\Interpolator.cs" />
      <Compile Include="Assets\Scripts\Sample\NoiseSample.cs" />
      <Compile Include="Assets\Scripts\Sample\NoiseSampleManager.cs" />

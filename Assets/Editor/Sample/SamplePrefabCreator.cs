@@ -9,7 +9,7 @@ public class SamplePrefabCreator : EditorWindow {
 	private int octave = 1;
 	private string name = "Sample3D";
 
-	[MenuItem("Procedure Terrain/Create Asset/Perlin Sample3D")]
+	[MenuItem("Procedure Terrain/Create Sample/Perlin Sample3D")]
 	private static void perlinSampleWindow()
 	{
 		EditorWindow.GetWindow<SamplePrefabCreator>(true, "3D Sample Asset Creator");

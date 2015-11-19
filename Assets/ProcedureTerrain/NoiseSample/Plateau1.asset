@@ -9,11 +9,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1208d39cec59ef648b8cec9f0306b3cb, type: 3}
-  m_Name: NoisedSample
+  m_Name: Plateau1
   m_EditorClassIdentifier: 
-  weight: 1
   sample: {fileID: 11400000, guid: 25f7bb7f79523594cb5f506579a5de85, type: 2}
-  sampleScale: {x: 1, y: 1, z: 1}
-  saturation: {fileID: 11400000, guid: b0003deeea90ad14b90acd3f651c2574, type: 2}
+  saturation: {fileID: 11400000, guid: 72ca27b2ff84ce848ba1b72a76b007f7, type: 2}
+  sampleScale: {x: .400000006, y: .100000001, z: .400000006}
+  noiseScale: 40
+  traslation: {x: 0, y: 0, z: 0}
   rotation: {x: 0, y: 0, z: 0}
   pivot: {x: 0, y: 0, z: 0}

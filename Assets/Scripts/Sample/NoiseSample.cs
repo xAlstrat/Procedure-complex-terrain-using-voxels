@@ -7,16 +7,15 @@ using System.Collections;
 public class NoiseSample : ScriptableObject
 {
 	/// <summary>
-	/// Weight of this noise in the final terrain.
-	/// </summary>
-	/// <value>The weight.</value>
-	public float weight;
-
-	/// <summary>
 	/// 3D sample of smooth moise.
 	/// </summary>
 	/// <value>The sample.</value>
 	public PersistentSample3D sample;
+
+	/// <summary>
+	/// The saturation applied to this sample.
+	/// </summary>
+	public Saturation saturation;
 
 	/// <summary>
 	/// The sample scale.
@@ -25,17 +24,25 @@ public class NoiseSample : ScriptableObject
 	public Vector3 sampleScale;
 
 	/// <summary>
-	/// The saturation applied to this sample.
+	/// Scale of this noise in the final terrain.
 	/// </summary>
-	public Saturation saturation;
+	/// <value>The weight.</value>
+	public float noiseScale;
+
+	/// <summary>
+	/// The filters this noise sample will use;
+	/// </summary>
+	public NoiseFilter[] filters;
 	
+	[Header("   Sample Transformation")]
+	public Vector3 traslation = Vector3.zero;
 	public Vector3 rotation = Vector3.zero;
 	public Vector3 pivot = Vector3.zero;
 
 	public void InitNoise(float weight, Saturation saturation, Vector3 sampleScale){
 		setSaturation (saturation);
 		setScale (sampleScale);
-		setWeight (weight);
+		setNoiseScale (weight);
 	}
 
 	public void rotate(Vector3 rotation){
@@ -62,8 +69,16 @@ public class NoiseSample : ScriptableObject
 		return SampleRepository.getSample (sample.getName());
 	}
 
-	public void setWeight(float weight){
-		this.weight = weight;
+	public void setNoiseScale(float scale){
+		this.noiseScale = scale;
+	}
+
+	public bool filterAt(float x, float y,  float z, float h, bool noiseApplied){
+		foreach (NoiseFilter filter in filters) {
+			if ((filter.uniqueNoiseRequired () && noiseApplied) || filter.filterAt (x, y, z, h))
+				return true;
+		}
+		return false;
 	}
 
 }
