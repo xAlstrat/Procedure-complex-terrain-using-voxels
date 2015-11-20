@@ -39,6 +39,8 @@ public class MarchingCube {
 
 	/// <summary>
 	/// Recalculates and updates the index of the marching cube.
+	/// 
+	/// This index says what vertices of the marching cube has positive dentities.
 	/// </summary>
 	private void updateCubeIndex(){
 		cubeIndex = 0;
@@ -109,15 +111,16 @@ public class MarchingCube {
 	private void generateVertices(int x, int y, int z, ChunkProcessor processor){
 		int edges = edgesTable [cubeIndex];
 		int c = 1<<11;
-		int index;
-		//Debug.Log ("edges: " + edges);
+		int index = 11;
 		while (c > 0) {
 			if((c & edges) > 0){
-				index = bitToIndex(c);
+				//index = bitToIndex(c);
+				//index = MSB(c);
 				//Debug.Log("   index: "+index);
 				generateVertex(x, y, z, index, processor);
 			}
 			c >>= 1;
+			index--;
 		}
 	}
 
@@ -165,7 +168,7 @@ public class MarchingCube {
 	/// 
 	/// This function must be used for the edgesTable values.
 	/// </summary>
-	/// <returns>The to index.</returns>
+	/// <returns>The most significant  bit 1 index.</returns>
 	/// <param name="bits">Bits.</param>
 	private int bitToIndex(int bits){
 		int index = -1;
@@ -175,6 +178,10 @@ public class MarchingCube {
 		}
 		return index;
 	}
+
+	private static readonly int[] significantBitToIndex = new int[13]{
+		-1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11
+	};
 
 
 	public void march(int x, int y, int z, float[,,] chunkDensity, ChunkProcessor processor){
@@ -208,7 +215,7 @@ public class MarchingCube {
 		new Pair<Vector3, Vector3> (new Vector3 (0, 0, 1), new Vector3 (0, 1, 1))};
 
 	/// <summary>
-	/// Holds the neighbor indexation for quickly vertex finding.
+	/// Holds the neighbor indexation for quick vertex finding.
 	/// 
 	/// The indexation works as this way:
 	/// neighbors[EDGE] must contains the list of voxels sharing that EDGE.
@@ -290,6 +297,18 @@ public class MarchingCube {
 				new Pair<Vector3, int>(new Vector3(-1, 0, 1), 9)},
 		
 	};
+
+	private static readonly int[] DeBruijnMSBTable = new int[32] 
+	{
+		0, 1, 28, 2, 29, 14, 24, 3, 30, 22, 20, 15, 25, 17, 4, 8, 
+		31, 27, 13, 23, 21, 19, 16, 7, 26, 12, 18, 6, 11, 5, 10, 9
+	};
+	
+	
+	
+	private int MSB(int bits){
+		return DeBruijnMSBTable[(uint)(bits * 0x077CB531U) >> 27];
+	}
 
 	/// <summary>
 	/// Returns the edges that take part in the formation of triangles.

@@ -46,6 +46,16 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\Scripts\BenchMark\Analizer\Analyzer.cs" />
+     <Compile Include="Assets\Scripts\BenchMark\Analizer\BinaryMSB2Analizer.cs" />
+     <Compile Include="Assets\Scripts\BenchMark\Analizer\BinaryMSBAnalizer.cs" />
+     <Compile Include="Assets\Scripts\BenchMark\Analizer\DeBruijnMSBAnalyzer.cs" />
+     <Compile Include="Assets\Scripts\BenchMark\Analizer\LinearMSBAnalizer.cs" />
+     <Compile Include="Assets\Scripts\BenchMark\Analizer\MSBAnalyzer.cs" />
+     <Compile Include="Assets\Scripts\BenchMark\Benchmark.cs" />
+     <Compile Include="Assets\Scripts\BenchMark\BenchmarkInit.cs" />
+     <Compile Include="Assets\Scripts\BenchMark\MSBBenchmark.cs" />
+     <Compile Include="Assets\Scripts\BenchMark\Tester\MSBTester.cs" />
      <Compile Include="Assets\Scripts\CameraController.cs" />
      <Compile Include="Assets\Scripts\Chunk.cs" />
      <Compile Include="Assets\Scripts\ChunkProcessor.cs" />
@@ -74,6 +84,14 @@
      <Compile Include="Assets\Scripts\TestTexture.cs" />
      <Compile Include="Assets\Scripts\VectorV3.cs" />
      <Compile Include="Assets\Scripts\Voxel.cs" />
+     <None Include="Assets\Analyzer\MSB\12BIT_DeBruijn.txt" />
+     <None Include="Assets\Analyzer\MSB\32BIT_DeBruijn.txt" />
+     <None Include="Assets\Analyzer\MSB\32BIT_Linear.txt" />
+     <None Include="Assets\Analyzer\MSB\12BIT_Linear.txt" />
+     <None Include="Assets\Analyzer\MSB\32BIT_Binary.txt" />
+     <None Include="Assets\Analyzer\MSB\32BIT_Binary2.txt" />
+     <None Include="Assets\Analyzer\MSB\12BIT_Binary2.txt" />
+     <None Include="Assets\Analyzer\MSB\12BIT_Binary.txt" />
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>

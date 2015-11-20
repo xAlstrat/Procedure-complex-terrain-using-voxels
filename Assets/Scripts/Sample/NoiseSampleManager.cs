@@ -22,7 +22,6 @@ public class NoiseSampleManager
 	}
 
 	public float getSampleAt(float x, float y, float z){
-		float totalWeight = 0;
 		float result = 0;
 		float noise;
 		float tx, ty, tz;
