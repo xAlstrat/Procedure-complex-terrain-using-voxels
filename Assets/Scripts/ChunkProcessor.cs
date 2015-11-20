@@ -71,15 +71,18 @@ public class ChunkProcessor
 		this.chunk = chunk;
 		MarchingCube marchingCube = MarchingCube.getInstance();
 		float[,,] density = chunk.getDensity();
-
 		for(int x=0; x<voxelCount; x++){
 			for(int y=0; y<voxelCount; y++){
 				for(int z=0; z<voxelCount; z++){
+					Profiler.BeginSample("Marching:March");
 					marchingCube.march(x, y, z, density, this);
+					Profiler.EndSample();
 				}
 			}
 		}
+		Profiler.BeginSample("Proccessor:GenerateMesh");
 		generateMesh ();
+		Profiler.EndSample();
 		reset ();
 	}
 
@@ -106,7 +109,7 @@ public class ChunkProcessor
 		chunk.mesh.triangles = mesh_triangles;
 		chunk.mesh.normals = mesh_normals;
 		chunk.mesh.uv = uvs;
-		chunk.mesh.Optimize ();
+		//chunk.mesh.Optimize ();
 	}
 
 	public bool existVertex(int x, int y, int z, int edge){
@@ -155,7 +158,7 @@ public class ChunkProcessor
 	}
 
 	private Vector3 calculateTriangleNormal(int v1, int v2, int v3){
-		return Vector3.Normalize (Vector3.Cross (vertices [v2] - vertices [v1], vertices [v3] - vertices [v1]));
+		return (Vector3.Cross (vertices [v2] - vertices [v1], vertices [v3] - vertices [v1])).normalized;
 	}
 
 	private Vector3 calculateVertexNormal(int vertex){

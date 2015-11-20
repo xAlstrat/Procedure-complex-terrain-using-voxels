@@ -240,11 +240,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de9f434a44e10be4f97a7b295d01101d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  groundLevel: 15
+  groundLevel: 3
   chunkSize: 5
   voxelsPerUnit: 5
-  horizontalChunks: 10
-  verticalChunks: 7
+  horizontalChunks: 4
+  verticalChunks: 3
   noiseSamples:
   - {fileID: 11400000, guid: 037bfe419a584b84b8008de8fcaf1288, type: 2}
   - {fileID: 11400000, guid: 7523036f8bcb187438bb53b8b1fb94c3, type: 2}

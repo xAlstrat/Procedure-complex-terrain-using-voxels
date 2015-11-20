@@ -28,6 +28,8 @@ public class TerrainGenerator
 	}
 
 	public void generate(){
+		//Debug.Log(Profiler.maxNumberOfSamplesPerFrame);
+		Profiler.BeginSample("Terrain:Generate");
 		ChunkProcessor processor = new ChunkProcessor ();
 		for (int i = 0; i < horizontalChunks; i++) {
 			for (int j = 0; j < verticalChunks; j++) {
@@ -36,11 +38,17 @@ public class TerrainGenerator
 					                                     chunkSize*j+position.y,
 					                                     chunkSize*k+position.z);
 					Chunk chunk = Chunk.Instantiate (chunkPosition);
+					Profiler.BeginSample("Chunk:ApplyDensity");
 					chunk.applyDensity (density);
+					Profiler.EndSample();
+					Profiler.BeginSample("Proccessor:ProcessChunk");
 					processor.process (chunk);
+					Profiler.EndSample();
+
 				}
 			}
 		}
+		Profiler.EndSample();
 	}
 
 	public void setChunkSize(int size){

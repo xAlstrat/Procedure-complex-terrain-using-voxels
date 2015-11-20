@@ -10,6 +10,11 @@ using System.Collections.Generic;
 public class MarchingCube {
 	private static MarchingCube instance;
 
+	/// <summary>
+	/// Vector used for avoiding uses too many news to return or pass parameters to functions.
+	/// </summary>
+	private Vector3 tempVector;
+
 	public static MarchingCube getInstance(){
 		if(instance==null){
 			instance = new MarchingCube();
@@ -32,6 +37,13 @@ public class MarchingCube {
 	/// </summary>
 	private int cubeIndex;
 
+	/// <summary>
+	/// A list of indeces related to every edge of the marching cube.
+	/// 
+	/// Ej: vertexIndeces[someEdge] give the index of that vertex (if that edge has one)
+	/// </summary>
+	private int[] vertexIndeces = new int[12];
+
 	private MarchingCube(){
 		position = new Vector3 (0, 0, 0);
 		densities = new float[8];
@@ -46,6 +58,7 @@ public class MarchingCube {
 		cubeIndex = 0;
 		for (int c=7; c>=0; c--) {
 			cubeIndex <<= 1;
+			//cubeIndex |= (int)densities[c]>>31;
 			cubeIndex |= densities[c]>0?1:0;
 		}
 	}
@@ -56,23 +69,23 @@ public class MarchingCube {
 		return res;
 	}
 
-	private Vector3 interpolate (VectorV3 v1, VectorV3 v2, ChunkProcessor processor){
-		float density1 = processor.getChunk ().getDensityAt ((int)v1.x, (int)v1.y, (int)v1.z);
-		float density2 = processor.getChunk ().getDensityAt ((int)v2.x, (int)v2.y, (int)v2.z);
+	private Vector3 interpolate (float v1x, float v1y, float v1z, float v2x, float v2y, float v2z, ChunkProcessor processor){
+		float density1 = processor.getChunk ().getDensityAt ((int)v1x, (int)v1y, (int)v1z);
+		float density2 = processor.getChunk ().getDensityAt ((int)v2x, (int)v2y, (int)v2z);
 		//Debug.Log ("d1:"+density1+" d2:"+density2);
 		//Debug.Log (v1.x+","+v1.y+","+v1.z+" - "+v2.x+","+v2.y+","+v2.z);
-		v1.x = interpolateValues(v1.x, v2.x, density1, density2)* Chunk.DELTA ;
-		v1.y = interpolateValues(v1.y, v2.y, density1, density2)* Chunk.DELTA ;
-		v1.z = interpolateValues(v1.z, v2.z, density1, density2)* Chunk.DELTA ;
+		tempVector.x = interpolateValues(v1x, v2x, density1, density2)* Chunk.DELTA ;
+		tempVector.y = interpolateValues(v1y, v2y, density1, density2)* Chunk.DELTA ;
+		tempVector.z = interpolateValues(v1z, v2z, density1, density2)* Chunk.DELTA ;
 		//return (v1*density1+v2*density2)/(density1+density2)* Chunk.DELTA ;
-		return new Vector3(v1.x, v1.y, v1.z);
+		return tempVector;
 	}
 
 	private Vector3 interpolatedVertex(int x, int y, int z, int edge, ChunkProcessor processor){
 		Vector3 dir1 = edgeVertex [edge].First;
 		Vector3 dir2 = edgeVertex [edge].Second;
-		return interpolate(new VectorV3 (x + dir1.x, y + dir1.y, z + dir1.z),
-		                   new VectorV3 (x + dir2.x, y + dir2.y, z + dir2.z),
+		return interpolate(x + dir1.x, y + dir1.y, z + dir1.z,
+		                   x + dir2.x, y + dir2.y, z + dir2.z,
 		                   processor);
 	}
 
@@ -85,17 +98,21 @@ public class MarchingCube {
 	/// <param name="edge">Edge.</param>
 	private void generateVertex(int x, int y, int z, int edge, ChunkProcessor processor){
 		Pair<Vector3, int>[] neighbors = neighborsIndexation[edge];
+		int index;
 		for (int c = 0; c < neighbors.Length; c++) {
 			Vector3 dir = neighbors[c].First;
 			int neighborEdge = neighbors[c].Second;
 			if(processor.existVertex(x + (int)dir.x, y + (int)dir.y, z + (int)dir.z, neighborEdge)){
-				int index = processor.getVertexIndex(x + (int)dir.x, y + (int)dir.y, z + (int)dir.z, neighborEdge);
+				index = processor.getVertexIndex(x + (int)dir.x, y + (int)dir.y, z + (int)dir.z, neighborEdge);
 				processor.setVertexIndex( x, y, z, edge, index);
+				vertexIndeces[edge] = index;
 				return;
 			}
 		}
-		processor.setVertexIndex( x, y, z, edge, processor.getVertices ().Count);
-		processor.addVertexToGraph ( processor.getVertices ().Count);
+		index = processor.getVertices ().Count;
+		vertexIndeces[edge] = index;
+		processor.setVertexIndex( x, y, z, edge, index);
+		processor.addVertexToGraph ( index);
 		processor.getVertices ().Add (interpolatedVertex( x, y, z, edge, processor));
 
 		
@@ -138,9 +155,12 @@ public class MarchingCube {
 		/*processor.getTriangles ().Add (processor.getVertexIndex(x, y, z, edge1));
 		processor.getTriangles ().Add (processor.getVertexIndex(x, y, z, edge2));
 		processor.getTriangles ().Add (processor.getVertexIndex(x, y, z, edge3));*/
-		processor.addTriangle (processor.getVertexIndex(x, y, z, edge1),
+		/*processor.addTriangle (processor.getVertexIndex(x, y, z, edge1),
 		                       processor.getVertexIndex(x, y, z, edge2),
-		                       processor.getVertexIndex(x, y, z, edge3));
+		                       processor.getVertexIndex(x, y, z, edge3));*/
+		processor.addTriangle (vertexIndeces[edge1],
+		                       vertexIndeces[edge2],
+		                       vertexIndeces[edge3]);
 	}
 
 	/// <summary>
@@ -185,19 +205,25 @@ public class MarchingCube {
 
 
 	public void march(int x, int y, int z, float[,,] chunkDensity, ChunkProcessor processor){
-		int c = 0;
-		densities [c++] = chunkDensity [x, y, z];
-		densities [c++] = chunkDensity [x + 1, y, z];
-		densities [c++] = chunkDensity [x + 1, y, z + 1];
-		densities [c++] = chunkDensity [x, y, z + 1];
-		densities [c++] = chunkDensity [x, y + 1, z];
-		densities [c++] = chunkDensity [x + 1, y + 1, z];
-		densities [c++] = chunkDensity [x + 1, y + 1, z + 1];
-		densities [c] = chunkDensity [x, y + 1, z + 1];
+		Profiler.BeginSample("Marching:Density");
+		int xpo = x + 1, ypo = y + 1, zpo = z + 1;
+		densities [0] = chunkDensity [x, y, z];
+		densities [1] = chunkDensity [xpo, y, z];
+		densities [2] = chunkDensity [xpo, y, zpo];
+		densities [3] = chunkDensity [x, y, zpo];
+		densities [4] = chunkDensity [x, ypo, z];
+		densities [5] = chunkDensity [xpo, ypo, z];
+		densities [6] = chunkDensity [xpo, ypo, zpo];
+		densities [7] = chunkDensity [x, ypo, zpo];
 
 		updateCubeIndex ();
+		Profiler.EndSample();
+		Profiler.BeginSample("Marching:Vertices");
 		generateVertices (x, y, z, processor);
+		Profiler.EndSample();
+		Profiler.BeginSample("Marching:Triangles");
 		generateTriangles (x, y, z, processor);
+		Profiler.EndSample();
 	}
 	
 	private static readonly Pair<Vector3, Vector3>[] edgeVertex = new Pair<Vector3, Vector3>[12]{

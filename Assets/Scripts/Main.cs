@@ -29,9 +29,9 @@ public class Main : MonoBehaviour
 	[Header("   Sample List")]
 	public NoiseSample[] noiseSamples;
 
-
+	private bool started = false;
 	// Use this for initialization
-	void Start ()
+	void Start2 ()
 	{
 		Chunk.setSize (chunkSize);
 		Chunk.setDiscretization (voxelsPerUnit);
@@ -72,7 +72,11 @@ public class Main : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
 	{
-	
+		if (!started) {
+			started = true;
+			Profiler.maxNumberOfSamplesPerFrame = -1;
+			Invoke("Start2", 0);
+		}
 	}
 }
 

@@ -19,7 +19,7 @@
 	<DebugType>full</DebugType>
 	<Optimize>false</Optimize>
 	<OutputPath>Temp\bin\Debug\</OutputPath>
-	<DefineConstants>DEBUG;TRACE;UNITY_5_1_2;UNITY_5_1;UNITY_5;ENABLE_NEW_BUGREPORTER;ENABLE_2D_PHYSICS;ENABLE_4_6_FEATURES;ENABLE_AUDIO;ENABLE_CACHING;ENABLE_CLOTH;ENABLE_DUCK_TYPING;ENABLE_FRAME_DEBUGGER;ENABLE_GENERICS;ENABLE_HOME_SCREEN;ENABLE_IMAGEEFFECTS;ENABLE_LIGHT_PROBES_LEGACY;ENABLE_MICROPHONE;ENABLE_MULTIPLE_DISPLAYS;ENABLE_PHYSICS;ENABLE_PHYSICS_PHYSX3;ENABLE_PLUGIN_INSPECTOR;ENABLE_SHADOWS;ENABLE_SINGLE_INSTANCE_BUILD_SETTING;ENABLE_SPRITES;ENABLE_TERRAIN;ENABLE_UNET;ENABLE_UNITYEVENTS;ENABLE_VR;ENABLE_WEBCAM;ENABLE_WWW;ENABLE_CLOUD_SERVICES;ENABLE_CLOUD_SERVICES_ANALYTICS;ENABLE_CLOUD_SERVICES_UNET;ENABLE_CLOUD_LICENSE;ENABLE_AUDIOMIXER_SUSPEND;ENABLE_EDITOR_METRICS;INCLUDE_DYNAMIC_GI;INCLUDE_GI;INCLUDE_IL2CPP;INCLUDE_DIRECTX12;PLATFORM_SUPPORTS_MONO;RENDER_SOFTWARE_CURSOR;ENABLE_LOCALIZATION;UNITY_STANDALONE_WIN;UNITY_STANDALONE;ENABLE_SUBSTANCE;ENABLE_TEXTUREID_MAP;ENABLE_RUNTIME_GI;ENABLE_MOVIES;ENABLE_NETWORK;ENABLE_CRUNCH_TEXTURE_COMPRESSION;ENABLE_WEBSOCKET_HOST;ENABLE_MONO;ENABLE_PROFILER;DEBUG;TRACE;UNITY_ASSERTIONS;UNITY_EDITOR;UNITY_EDITOR_64;UNITY_EDITOR_WIN</DefineConstants>
+	<DefineConstants>DEBUG;TRACE;UNITY_5_1_2;UNITY_5_1;UNITY_5;ENABLE_NEW_BUGREPORTER;ENABLE_2D_PHYSICS;ENABLE_4_6_FEATURES;ENABLE_AUDIO;ENABLE_CACHING;ENABLE_CLOTH;ENABLE_DUCK_TYPING;ENABLE_FRAME_DEBUGGER;ENABLE_GENERICS;ENABLE_HOME_SCREEN;ENABLE_IMAGEEFFECTS;ENABLE_LIGHT_PROBES_LEGACY;ENABLE_MICROPHONE;ENABLE_MULTIPLE_DISPLAYS;ENABLE_PHYSICS;ENABLE_PHYSICS_PHYSX3;ENABLE_PLUGIN_INSPECTOR;ENABLE_SHADOWS;ENABLE_SINGLE_INSTANCE_BUILD_SETTING;ENABLE_SPRITES;ENABLE_TERRAIN;ENABLE_UNET;ENABLE_UNITYEVENTS;ENABLE_VR;ENABLE_WEBCAM;ENABLE_WWW;ENABLE_CLOUD_SERVICES;ENABLE_CLOUD_SERVICES_ANALYTICS;ENABLE_CLOUD_SERVICES_UNET;ENABLE_CLOUD_LICENSE;ENABLE_AUDIOMIXER_SUSPEND;ENABLE_EDITOR_METRICS;INCLUDE_DYNAMIC_GI;INCLUDE_GI;INCLUDE_IL2CPP;INCLUDE_DIRECTX12;PLATFORM_SUPPORTS_MONO;RENDER_SOFTWARE_CURSOR;ENABLE_LOCALIZATION;UNITY_STANDALONE_WIN;UNITY_STANDALONE;ENABLE_SUBSTANCE;ENABLE_TEXTUREID_MAP;ENABLE_RUNTIME_GI;ENABLE_MOVIES;ENABLE_NETWORK;ENABLE_CRUNCH_TEXTURE_COMPRESSION;ENABLE_WEBSOCKET_HOST;ENABLE_MONO;DEVELOPMENT_BUILD;ENABLE_PROFILER;DEBUG;TRACE;UNITY_ASSERTIONS;UNITY_EDITOR;UNITY_EDITOR_64;UNITY_EDITOR_WIN</DefineConstants>
 	<ErrorReport>prompt</ErrorReport>
 	<WarningLevel>4</WarningLevel>
 	<NoWarn>0169</NoWarn>
@@ -47,14 +47,18 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\Scripts\BenchMark\Analizer\Analyzer.cs" />
-     <Compile Include="Assets\Scripts\BenchMark\Analizer\BinaryMSB2Analizer.cs" />
-     <Compile Include="Assets\Scripts\BenchMark\Analizer\BinaryMSBAnalizer.cs" />
-     <Compile Include="Assets\Scripts\BenchMark\Analizer\DeBruijnMSBAnalyzer.cs" />
-     <Compile Include="Assets\Scripts\BenchMark\Analizer\LinearMSBAnalizer.cs" />
-     <Compile Include="Assets\Scripts\BenchMark\Analizer\MSBAnalyzer.cs" />
+     <Compile Include="Assets\Scripts\BenchMark\Analizer\MSB\BinaryMSB2Analizer.cs" />
+     <Compile Include="Assets\Scripts\BenchMark\Analizer\MSB\BinaryMSBAnalizer.cs" />
+     <Compile Include="Assets\Scripts\BenchMark\Analizer\MSB\DeBruijnMSBAnalyzer.cs" />
+     <Compile Include="Assets\Scripts\BenchMark\Analizer\MSB\LinearMSBAnalizer.cs" />
+     <Compile Include="Assets\Scripts\BenchMark\Analizer\MSB\MSBAnalyzer.cs" />
+     <Compile Include="Assets\Scripts\BenchMark\Analizer\ZeroComparer\BitZeroComparer.cs" />
+     <Compile Include="Assets\Scripts\BenchMark\Analizer\ZeroComparer\NormalZeroComparer.cs" />
+     <Compile Include="Assets\Scripts\BenchMark\Analizer\ZeroComparer\ZeroComparer.cs" />
      <Compile Include="Assets\Scripts\BenchMark\Benchmark.cs" />
      <Compile Include="Assets\Scripts\BenchMark\BenchmarkInit.cs" />
      <Compile Include="Assets\Scripts\BenchMark\MSBBenchmark.cs" />
+     <Compile Include="Assets\Scripts\BenchMark\SignBenchmark.cs" />
      <Compile Include="Assets\Scripts\BenchMark\Tester\MSBTester.cs" />
      <Compile Include="Assets\Scripts\CameraController.cs" />
      <Compile Include="Assets\Scripts\Chunk.cs" />
@@ -87,8 +91,10 @@
      <None Include="Assets\Analyzer\MSB\12BIT_DeBruijn.txt" />
      <None Include="Assets\Analyzer\MSB\32BIT_DeBruijn.txt" />
      <None Include="Assets\Analyzer\MSB\32BIT_Linear.txt" />
+     <None Include="Assets\Analyzer\Sign\BitSign.txt" />
      <None Include="Assets\Analyzer\MSB\12BIT_Linear.txt" />
      <None Include="Assets\Analyzer\MSB\32BIT_Binary.txt" />
+     <None Include="Assets\Analyzer\Sign\NormalSign.txt" />
      <None Include="Assets\Analyzer\MSB\32BIT_Binary2.txt" />
      <None Include="Assets\Analyzer\MSB\12BIT_Binary2.txt" />
      <None Include="Assets\Analyzer\MSB\12BIT_Binary.txt" />

@@ -1,13 +1,16 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\BenchMark\Analizer\Analyzer.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\BenchMark\BenchmarkInit.cs">
     <Files>
-      <File FileName="Assets\Scripts\Chunk.cs" Line="66" Column="40" />
-      <File FileName="Assets\Scripts\Sample\DefaultInterpolator.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\ChunkProcessor.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\MarchingCube.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\BenchMark\BenchmarkInit.cs" Line="11" Column="30" />
-      <File FileName="Assets\Scripts\BenchMark\Analizer\Analyzer.cs" Line="31" Column="20" />
+      <File FileName="Assets\Scripts\Main.cs" Line="77" Column="45" />
+      <File FileName="Assets\Scripts\ChunkProcessor.cs" Line="85" Column="22" />
+      <File FileName="Assets\Scripts\MarchingCube.cs" Line="50" Column="2" />
+      <File FileName="Assets\Scripts\Terrain\TerrainGenerator.cs" Line="32" Column="3" />
+      <File FileName="Assets\Scripts\BenchMark\Analizer\ZeroComparer\ZeroComparer.cs" Line="22" Column="21" />
+      <File FileName="Assets\Scripts\BenchMark\Analizer\ZeroComparer\BitZeroComparer.cs" Line="5" Column="2" />
+      <File FileName="Assets\Scripts\BenchMark\Analizer\ZeroComparer\NormalZeroComparer.cs" Line="6" Column="39" />
+      <File FileName="Assets\Scripts\BenchMark\SignBenchmark.cs" Line="6" Column="45" />
+      <File FileName="Assets\Scripts\BenchMark\BenchmarkInit.cs" Line="11" Column="28" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

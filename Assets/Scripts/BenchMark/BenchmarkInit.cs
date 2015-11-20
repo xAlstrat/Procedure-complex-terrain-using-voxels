@@ -7,8 +7,8 @@ public class BenchmarkInit : MonoBehaviour
 	// Use this for initialization
 	void Start ()
 	{
-		Benchmark benchmark = new MSBBenchmark("MSB");
-		benchmark.runBenchmark (500);
+		Benchmark benchmark = new SignBenchmark("Sign");
+		benchmark.runBenchmark (1);
 	}
 }
 
