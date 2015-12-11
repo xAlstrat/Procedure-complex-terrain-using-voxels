@@ -1,7 +1,7 @@
 # Procedure Terrain Generation
 
 This is a Unity3D project for 3D terrain generation through voxels.
-I want to learn all about terrain generation, so I started with this project to learn something about it.
+I want to learn all about terrain generation, so I started this project to learn something about it.
 I'd like to achieve a usefull terrain generator for our games that allow us to build any kind of terrain we want or imagine.
 
 This project is just starting !
